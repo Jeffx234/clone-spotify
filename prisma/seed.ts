@@ -29,8 +29,10 @@ const run = async () => {
     where: { email: "user@teste.com" },
     update: {},
     create: {
-      email: "user@teste.com",
+      email: "jefersonluisx@hotmail.com",
       password: bcrypt.hashSync("password", salt),
+      firstName: "Jeferson",
+      lastName: "Luis",
     },
   });
 
