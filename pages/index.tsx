@@ -4,17 +4,19 @@ import GradientLayout from '../components/gradientLayout'
 import prisma from '../lib/prisma'
 import { useMe } from '../lib/hooks'
 
-const Home = ({artists, users, playlists}) => {
+const Home = ({artists}) => {
+  const { user } = useMe()
 
-  const userName = users.map(user => user.firstName + ' ' + user.lastName)
+  console.log(user)
+
   return (
     <GradientLayout
       roundImage
       image="./goku.png"
       color="gray"
       subTitle="profile"
-      title={`${userName}`}
-      description={`10 public playlists`}
+      title={`${user?.firstName} ${user?.lastName}`}
+      description={`${user?.playlistsCount} public playlists`}
     >
       <Box color="white" paddingX="40px">
         <Box mb="40px">
@@ -25,7 +27,7 @@ const Home = ({artists, users, playlists}) => {
           {artists.map(artist => (
             <Box key={artist.id} paddingX="10px" width="20%">
               <Box bg="gray.900" borderRadius="4px" padding="15px" width="100%">
-                <Image src="https://placekitten.com/300/300" borderRadius="100%" />
+                <Image height="100%" w="100%" src="https://placekitten.com/300/300" />
                 <Box mt="10px">
                   <Text fontSize="large">{artist.name}</Text>
                   <Text fontSize="small">Artist</Text>

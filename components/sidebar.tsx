@@ -55,6 +55,7 @@ const musicMenu = [
 
 const Sidebar = () => {
  const { playlists } = usePlaylist()
+ console.log(playlists)
   return (
     <Box
       width="100%"
@@ -73,11 +74,12 @@ const Sidebar = () => {
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
                 <LinkBox>
                   <NextLink href={menu.route} passHref>
-                    <LinkOverlay>
+                    <LinkOverlay display="flex" alignItems="center">
                       <ListIcon
                         as={menu.icon}
                         color="white"
                         marginRight="20px"
+                        fontSize="24px"
                       />
                       {menu.name}
                     </LinkOverlay>
@@ -87,17 +89,18 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
-        <Box marginTop="20px">
+        <Box marginTop="50px" >
           <List spacing={2}>
             {musicMenu.map((menu) => (
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
                 <LinkBox>
                   <NextLink href={menu.route} passHref>
-                    <LinkOverlay>
+                    <LinkOverlay display="flex" alignItems="center">
                       <ListIcon
                         as={menu.icon}
                         color="white"
                         marginRight="20px"
+                        fontSize="24px"
                       />
                       {menu.name}
                     </LinkOverlay>
@@ -110,13 +113,13 @@ const Sidebar = () => {
         <Divider color="gray.800" />
         <Box height="66%" overflowY="auto" paddingY="20px">
           <List spacing={2}>
-            {artistsData.map((playlist) => (
+            {playlists.map((playlist) => (
               <ListItem paddingX="20px" key={playlist.name}>
                 <LinkBox>
                   <NextLink
                     href={{
                       pathname: '/playlist/[id]',
-                     // query: { id: playlist },
+                      query: { id: playlist.id },
                     }}
                     passHref
                   >
