@@ -20,7 +20,7 @@ module.exports = {
       'error',
       {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      } // eslint-disable-line
+      },
     ],
     'react/prop-types': 'off',
   },

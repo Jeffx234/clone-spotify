@@ -1,31 +1,31 @@
-import GradientLayout from "../../components/gradientLayout"
-import SongTable from "../../components/songsTable"
-import { validateToken } from "../../lib/auth"
-import prisma from "../../lib/prisma"
+import GradientLayout from '../../components/gradientLayout'
+import SongTable from '../../components/songsTable'
+import { validateToken } from '../../lib/auth'
+import prisma from '../../lib/prisma'
 
-const getBGColor = id => {
+const getBGColor = (id) => {
   const colors = [
     'red',
-    'orange',
-    'yellow',
     'green',
     'blue',
-    'indigo',
+    'orange',
     'purple',
-    'pink',
+    'gray',
+    'teal',
+    'yellow',
   ]
 
-  return colors[id % colors.length]
+  return colors[id - 1] || colors[Math.floor(Math.random() * colors.length)]
 }
 
 const Playlist = ({ playlist }) => {
   const color = getBGColor(playlist.id)
   return (
-    <GradientLayout 
-      color={color} 
-      roundImage={false} 
-      title={playlist.name} 
-      subTitle="playlist" 
+    <GradientLayout
+      color={color}
+      roundImage={false}
+      title={playlist.name}
+      subTitle="playlist"
       description={`${playlist.songs.length} songs`}
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
@@ -34,7 +34,7 @@ const Playlist = ({ playlist }) => {
   )
 }
 
-export const getServerSideProps = async ({query, req}) => {
+export const getServerSideProps = async ({ query, req }) => {
   let user
 
   try {
@@ -65,13 +65,12 @@ export const getServerSideProps = async ({query, req}) => {
           },
         },
       },
-    }
+    },
   })
 
   return {
     props: { playlist },
   }
 }
-
 
 export default Playlist
